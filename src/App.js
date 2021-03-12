@@ -10,6 +10,7 @@ import BaiTapRenderGiaoDien from './BaiTapVongLap/BaiTapRenderGiaoDien';
 import Props from './BaiTapProps/Props';
 import BaiTapTruyenFunction from './BaiTapProps/BaiTapTruyenFunction/BaiTapTruyenFunction';
 import BTGioHangRedux from './Redux/BaiTapRedux/BaiTapGioHang/BTGioHangRedux';
+import BaiTapGioHang from './BaiTapProps/BaiTapGioHang/BaiTapGioHang';
 function App() {
   return (
     <div className="App">
@@ -21,8 +22,9 @@ function App() {
         {/* <BaiTapVongLap/> */}
         {/* <BaiTapRenderGiaoDien/> */}
         {/* <Props/> */}
-        <BaiTapTruyenFunction/>
-        {/* <BTGioHangRedux/> */}
+        {/* <BaiTapTruyenFunction/> */}
+        {/* <BaiTapGioHang/> */}
+        <BTGioHangRedux/>
     </div>
   );
 }
