@@ -35,17 +35,27 @@ class GioHangRedux extends Component {
                                             <td><img src={spGh.hinhAnh} alt={spGh.hinhAnh} width={50} height={50}></img></td>
                                             <td>{spGh.tenSP}</td>
                                             <td>{spGh.giaBan.toLocaleString()}</td>
-                                            <td>{spGh.soLuong}</td>
+                                            <td>
+                                                <button className="btn btn-success" onClick={()=>{this.props.tangGiamSoLuong(spGh.maSP,true)}}>+</button>
+                                                {spGh.soLuong}
+                                                <button className="btn btn-success" onClick={()=>{this.props.tangGiamSoLuong(spGh.maSP,false)}}>-</button>
+                                            </td>
                                             <td>{(spGh.soLuong * spGh.giaBan).toLocaleString()}</td>
                                             <td><button className="btn btn-danger" onClick={()=>{this.props.xoaGioHang(spGh.maSP)}}>Xóa</button></td>
                                         </tr>
                                     })}
                                 </tbody>
+                                <tfoot>
+                                    <th colSpan={5}></th>
+                                    <th>Tổng tiền</th>
+                                    <th>{this.props.gioHang.reduce((tongTien,spGH,index)=>{
+                                        return tongTien += spGH.soLuong * spGH.giaBan
+                                    },0).toLocaleString()}</th>
+                                </tfoot>
                             </table>
                   </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                         </div>
                     </div>
                 </div>
@@ -72,6 +82,15 @@ const mapDispatchToProps = (dispatch) => {
             };
             // Dùng phương thức dispatch redux cung cấp để đưa dữ liệu lên reducer
             console.log(maSP);
+            dispatch(action)
+        },
+        tangGiamSoLuong : (maSP,tangGiam) => {
+            // TangGiam : true thì tăng , false thì giảm
+            // Tạo action để đưa dữ liệu lên reducer
+            let action = {
+                type : 'TANG_GIAM_SO_LUONG',maSP,tangGiam
+            };
+            // Để đưa action lên reducer mỗi khi người dùng click vào
             dispatch(action)
         }
     }

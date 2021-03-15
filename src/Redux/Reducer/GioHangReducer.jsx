@@ -35,6 +35,33 @@ const GioHangReducer = (state = stateGioHang, action) => {
                 // Dùng restparam biến thành state mới bởi vì phải có state mới thì mới cập nhật lại giao diện
                 return {...state};
             };break;
+        case 'TANG_GIAM_SO_LUONG':
+            {
+                let gioHangCapNhat = [...state.gioHang];
+                // Xử lý tăng giảm trên gioHangCapNhat
+                let index = gioHangCapNhat.findIndex(spGH => spGH.maSP === action.maSP);
+                if (index !== -1)
+                {
+                    if(action.tangGiam)
+                    {
+                        gioHangCapNhat[index].soLuong += 1;
+                    }
+                    else
+                    {
+                        if(gioHangCapNhat[index].soLuong > 1)
+                        {
+                            gioHangCapNhat[index].soLuong -= 1;
+                        }
+                        else
+                        {
+                            alert('Số lượng tối thiểu là 1');
+                        }
+                    }
+                }
+                // Lấy giá trị gioHangCapNhat gán vào state.gioHang
+                state.gioHang = gioHangCapNhat;
+                return {...state}
+            }
         default : return { ...state }
     }
 }
